@@ -607,7 +607,7 @@ public class menu_Rdota extends JFrame {
 							}
 							catch (Exception ee) 
 							{
-								JOptionPane.showMessageDialog(null, "Société Non Ajouté" );
+								JOptionPane.showMessageDialog(null, "Société Non Ajouté à Rdota" );
 								ee.printStackTrace();
 							}
 						rafraichir_tsociete();
@@ -1192,5 +1192,6 @@ public class menu_Rdota extends JFrame {
 			clock();
 			impexp();
 
+			// j'aime les sushis !!
 		}
 	}
