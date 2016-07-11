@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.*;
+import java.io.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.EmptyBorder;
@@ -62,6 +64,7 @@ public class menu_Rdota extends JFrame {
 	private Connecter conn5=new Connecter();
 	private String date_debut, date_fin;
 	private String nom_chauffeur;
+	private JTextField textFieldExp;
 	
 		/**
 		 * Lancement de l'application.
@@ -399,14 +402,14 @@ public class menu_Rdota extends JFrame {
 				  String sTest_1=textnum.getText(); 
 				  String sTest_2=textprenom.getText(); 
 				  String sTest_3=textsociete.getText(); 
-				//if ( textchauf.getText() != null && textnum.getText() !=null && textprenom.getText()!=null && textsociete.getText()!=null )
-				  //{
+				if ( textchauf.getText() != "" && textnum.getText() !="" && textprenom.getText()!="" && textsociete.getText()!="" )
+				  {
 				  String sql = ("INSERT INTO tchauffeur VALUES ('"+sTest+"','"+sTest_2+"', '"+sTest_1+"', '"+sTest_3+"');");
 				  st.executeUpdate(sql);
 				  System.out.println("Chauffeur Ajouté!");
 				  JOptionPane.showMessageDialog(null, "Succés! Chauffeur ajouté" );
-				 // }
-				//else   JOptionPane.showMessageDialog(null, "Erreur ! Compléter les cases vides" );
+				  }
+				else   JOptionPane.showMessageDialog(null, "Erreur ! Compléter les cases vides" );
 				}
 				catch (Exception eedf) 
 				{
@@ -415,7 +418,7 @@ public class menu_Rdota extends JFrame {
 				}
 			refreshtab_chauffeur();
 		}
-			
+				
 		});
 		buttonValid.setIcon(new ImageIcon("C:\\Users\\LFONSEQUE\\Pictures\\ok_button.png"));
 		buttonValid.setBounds(217, 106, 50, 40);
@@ -780,7 +783,7 @@ public class menu_Rdota extends JFrame {
 			JLabel label_choisir_fichier_impexp;
 			JLabel label_importer;
 			JLabel label_exporter;
-			JButton btnParcourir_export;
+			JButton btnexporter;
 			Connecter conn6=new Connecter();
 			Connecter conn7=new Connecter();
 			//Programme
@@ -801,17 +804,17 @@ public class menu_Rdota extends JFrame {
 			
 			label_exporter = new JLabel("Exporter :");
 			label_exporter.setFont(new Font("Tahoma", Font.BOLD, 18));
-			label_exporter.setBounds(287, 123, 112, 32);
+			label_exporter.setBounds(113, 123, 112, 32);
 			panel_import_export.add(label_exporter);
 			
 
 			
-			btnParcourir_export = new JButton("Parcourir");
-			btnParcourir_export.setBackground(Color.WHITE);
-			btnParcourir_export.setForeground(Color.BLACK);
-			btnParcourir_export.setBounds(396, 122, 188, 40);
+			btnexporter = new JButton("Exporter");
+			btnexporter.setBackground(Color.WHITE);
+			btnexporter.setForeground(Color.BLACK);
+			btnexporter.setBounds(396, 122, 188, 40);
 			
-			panel_import_export.add(btnParcourir_export);
+			panel_import_export.add(btnexporter);
 			
 			JButton buttonParcourir_imp = new JButton("Parcourir");
 			buttonParcourir_imp.addActionListener(new ActionListener() {
@@ -826,7 +829,7 @@ public class menu_Rdota extends JFrame {
                  try {
 				  
                  Statement stm7=conn7.obtenirconnexion().createStatement(); 
-				  stm7.executeQuery("COPY   tchauffeur from '"+chemin+"' with DELIMITER ';' "); // "DELETE FROM tsociete WHERE \"Nom\" ='"+sTest1+"';"
+				  stm7.executeQuery("copy tchauffeur from '"+chemin+"' with DELIMITER ';'  CSV HEADER;"); // copy tchauffeur from 'C:\Program Files\PostgreSQL\9.3\data\test.csv' with DELIMITER ';' CSV HEADER; 
 				  JOptionPane.showMessageDialog(null, "Fichier bien importé ! ");
 					    
 				}catch (Exception e) 
@@ -854,25 +857,44 @@ public class menu_Rdota extends JFrame {
 			dtrpnFbnw.setBounds(370, 280, 448, 190);
 			panel_import_export.add(dtrpnFbnw);
 			
+			textFieldExp = new JTextField();
+			textFieldExp.setBounds(235, 122, 137, 40);
+			panel_import_export.add(textFieldExp);
+			textFieldExp.setColumns(10);
 			
-			btnParcourir_export.addActionListener(new ActionListener() {
+			JEditorPane dtrpnVotreFichierExcel = new JEditorPane();
+			dtrpnVotreFichierExcel.setText("Votre fichier excel CSV se trouve dans le r\u00E9pertoir suivant :\r\nC:\\Program Files\\PostgreSQL\\9.3\\data\\");
+			dtrpnVotreFichierExcel.setBounds(624, 112, 204, 62);
+			panel_import_export.add(dtrpnVotreFichierExcel);
+			
+			
+			btnexporter.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-                    String chemin="";
-                      System.out.println("fghjkl11111");
-                     JFileChooser fc = new JFileChooser();
-                     System.out.println("fghjkl2222");
-                              int retval = fc.showOpenDialog(null);
-                              System.out.println("fghjkl33333");
+					String fileName1=""+textFieldExp.getText()+".csv";
+						System.out.println(""+fileName1+"");
+					try{
+					PrintWriter outputStream = new PrintWriter(fileName1);
+				
+					//outputStream = new PrintWriter(fileName1);
+					System.out.println("Done.");
+					outputStream.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+                    //String chemin="";    
+                    String exp = "C:\\Program Files\\PostgreSQL\\9.3\\data\\"+fileName1+"";
+                    exp = exp.replace("\\", "/");
+                     //JFileChooser fc = new JFileChooser();         
+                              /*int retval = fc.showOpenDialog(null);                
                               if (retval == JFileChooser.APPROVE_OPTION) {
-                                  System.out.println("fghjkl44444");
                                   chemin = fc.getSelectedFile().getAbsolutePath();
-                                  System.out.println("fghjkl555555");
-                                  chemin = chemin.replace("\\", "/");
-                                  
+                                  chemin = chemin.replace("\\", "/");*/
+                                  String copy = "copy tchauffeur to '"+exp+"' with DELIMITER ';' CSV HEADER; "; // copy  tchauffeur to 'C:\Program Files\PostgreSQL\9.3\data\test.csv' with DELIMITER ';' CSV HEADER; 
                   try {
 				  
                   Statement stm6=conn6.obtenirconnexion().createStatement(); 
-				  stm6.executeQuery("COPY   tchauffeur to '"+chemin+"' with DELIMITER ';' "); // "DELETE FROM tsociete WHERE \"Nom\" ='"+sTest1+"';"
+				  stm6.executeQuery(""+copy+""); // "DELETE FROM tsociete WHERE \"Nom\" ='"+sTest1+"';"
 				  JOptionPane.showMessageDialog(null, "Fichier bien exporté ! ");
 					    
 				}catch (Exception e) 
@@ -881,7 +903,7 @@ public class menu_Rdota extends JFrame {
 					JOptionPane.showMessageDialog(null, "Fichier non exporté ! ");
 				}
                   }
-              }
+             // }
         });
 	
 			
