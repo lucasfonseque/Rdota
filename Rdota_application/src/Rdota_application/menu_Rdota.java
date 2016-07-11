@@ -845,16 +845,10 @@ public class menu_Rdota extends JFrame {
 			buttonParcourir_imp.setBounds(396, 200, 188, 40);
 			panel_import_export.add(buttonParcourir_imp);
 			
-			JButton btnInformationImportante = new JButton("Information Importante :");
-			btnInformationImportante.setForeground(Color.RED);
-			btnInformationImportante.setFont(new Font("Tahoma", Font.BOLD, 18));
-			btnInformationImportante.setBounds(42, 280, 279, 54);
-			panel_import_export.add(btnInformationImportante);
-			
 			JEditorPane dtrpnFbnw = new JEditorPane();
-			dtrpnFbnw.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			dtrpnFbnw.setText("Pour importer ou exporter une table, il vous faut un fichier .CSV avec les droit n\u00E9c\u00E9ssaire \u00E0 l'importation et/ou l'exportation. Veuillez suivre la d\u00E9marche suivante :\r\n\r\n1.Clique droit sur votre fichier .csv\r\n2.Propri\u00E9r\u00E9 , puis, dans l'onglet s\u00E9curit\u00E9 cliquez sur Modifier, ensuite cliquez sur Ajouter\r\n3.Ecrire Tout dans la zone de texte et faire v\u00E9rifier les noms\r\n4.S\u00E9lectionnez Tout le monde et valider\r\n5.S\u00E9lectionnez le fichier \u00E0 importer ou exporter\r\n");
-			dtrpnFbnw.setBounds(370, 280, 448, 190);
+			dtrpnFbnw.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			dtrpnFbnw.setText("Pour l'importation, votre fichier excel CSV doit \u00EAtre mis dans le r\u00E9pertoir suivant :\r\n\r\nC:\\Program Files\\PostgreSQL\\9.3\\data\\\r\n");
+			dtrpnFbnw.setBounds(622, 191, 204, 62);
 			panel_import_export.add(dtrpnFbnw);
 			
 			textFieldExp = new JTextField();
@@ -863,8 +857,8 @@ public class menu_Rdota extends JFrame {
 			textFieldExp.setColumns(10);
 			
 			JEditorPane dtrpnVotreFichierExcel = new JEditorPane();
-			dtrpnVotreFichierExcel.setText("Votre fichier excel CSV se trouve dans le r\u00E9pertoir suivant :\r\nC:\\Program Files\\PostgreSQL\\9.3\\data\\");
-			dtrpnVotreFichierExcel.setBounds(624, 112, 204, 62);
+			dtrpnVotreFichierExcel.setText("Votre fichier excel CSV se trouve dans le r\u00E9pertoir suivant :\r\n\r\nC:\\Program Files\\PostgreSQL\\9.3\\data\\");
+			dtrpnVotreFichierExcel.setBounds(622, 111, 204, 62);
 			panel_import_export.add(dtrpnVotreFichierExcel);
 			
 			
