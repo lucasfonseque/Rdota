@@ -829,13 +829,14 @@ public class menu_Rdota extends JFrame {
                  try {
 				  
                  Statement stm7=conn7.obtenirconnexion().createStatement(); 
+                 JOptionPane.showMessageDialog(null, "Fichier bien importé ! ");
 				  stm7.executeQuery("copy tchauffeur from '"+chemin+"' with DELIMITER ';'  CSV HEADER;"); // copy tchauffeur from 'C:\Program Files\PostgreSQL\9.3\data\test.csv' with DELIMITER ';' CSV HEADER; 
-				  JOptionPane.showMessageDialog(null, "Fichier bien importé ! ");
+				  
 					    
 				}catch (Exception e) 
 				{
 					System.err.println(e);
-					JOptionPane.showMessageDialog(null, "Fichier non importé ! ");
+					//JOptionPane.showMessageDialog(null, "Fichier non importé ! "); en commentaire car on passe par le catch meme si le pgm a bien fonctionné
 				}
                  }	
 				}
@@ -879,30 +880,23 @@ public class menu_Rdota extends JFrame {
                     //String chemin="";    
                     String exp = "C:\\Program Files\\PostgreSQL\\9.3\\data\\"+fileName1+"";
                     exp = exp.replace("\\", "/");
-                     //JFileChooser fc = new JFileChooser();         
-                              /*int retval = fc.showOpenDialog(null);                
-                              if (retval == JFileChooser.APPROVE_OPTION) {
-                                  chemin = fc.getSelectedFile().getAbsolutePath();
-                                  chemin = chemin.replace("\\", "/");*/
                                   String copy = "copy tchauffeur to '"+exp+"' with DELIMITER ';' CSV HEADER; "; // copy  tchauffeur to 'C:\Program Files\PostgreSQL\9.3\data\test.csv' with DELIMITER ';' CSV HEADER; 
                   try {
 				  
                   Statement stm6=conn6.obtenirconnexion().createStatement(); 
+                  JOptionPane.showMessageDialog(null, "Fichier bien exporté ! ");
 				  stm6.executeQuery(""+copy+""); // "DELETE FROM tsociete WHERE \"Nom\" ='"+sTest1+"';"
-				  JOptionPane.showMessageDialog(null, "Fichier bien exporté ! ");
+				  
 					    
 				}catch (Exception e) 
 				{
 					System.err.println(e);
-					JOptionPane.showMessageDialog(null, "Fichier non exporté ! ");
+					//JOptionPane.showMessageDialog(null, "Fichier non exporté ! "); en commentaire car on passe par le catch meme si le pgm a bien fonctionné
 				}
                   }
              // }
         });
 	
-			
-			
-			
 		}
 		
 		public void control_horaire()
