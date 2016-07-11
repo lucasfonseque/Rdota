@@ -1,4 +1,5 @@
 package Rdota_application ;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 	import java.awt.EventQueue;
@@ -14,10 +15,14 @@ import java.awt.EventQueue;
 	import java.awt.Font;
 	import javax.swing.JOptionPane;
 	import java.awt.event.ActionListener;
-	import java.sql.Connection;
+import java.io.PrintWriter;
+import java.sql.Connection;
 	import java.sql.DriverManager;
 	import java.sql.Statement;
-	import java.awt.event.ActionEvent;
+import java.util.Calendar;
+import java.io.*;
+import java.util.GregorianCalendar;
+import java.awt.event.ActionEvent;
 	import javax.swing.JCheckBox;
 	import javax.swing.JPasswordField;
 import javax.swing.JFrame;
@@ -96,7 +101,62 @@ public class connexion_ihm0 extends JFrame {
 					}catch(Exception e){
 					    JOptionPane.showMessageDialog(null, "Connexion échec");
 					}
-	
+					
+////////////////////////////////////LOG ///////////////////////////////////////////
+					
+					Calendar cal = new GregorianCalendar();
+					int day = cal.get(Calendar.DAY_OF_MONTH);
+					int month = cal.get(Calendar.MONTH);
+					month++; // car le programme compte le 0
+					int year = cal.get(Calendar.YEAR);
+					
+					int second = cal.get(Calendar.SECOND);
+					int minute = cal.get(Calendar.MINUTE);
+					int hour = cal.get(Calendar.HOUR);
+					
+					String tempo = "  Time :  "+hour+":"+minute+":"+second+"  -  Date :  "+day+"/"+month+"/"+year ;
+					
+					
+					String fileName1="log.txt";
+					//System.out.println(""+fileName1+"");
+				try{
+				PrintWriter outputStream = new PrintWriter(fileName1);
+			
+				//outputStream = new PrintWriter(fileName1);
+				System.out.println("Done.");
+				outputStream.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+                String exp = "C:\\Program Files\\PostgreSQL\\9.3\\data\\"+fileName1+"";
+                exp = exp.replace("\\", "/");
+                       
+                	//File fichier = new File (exp);
+                	File fichier=new File("C:\\Program Files\\PostgreSQL\\9.3\\data\\log.txt"); // définir l'arborescence
+					//fichier.createNewFile();
+					//FileWriter fichier_ecrire=new FileWriter(fichier);
+					//fichier_ecrire.write("****** ");  // écrire une ligne dans le fichier resultat.txt
+					//fichier_ecrire.write("\n"); // forcer le passage à la ligne
+					/*ffw.close(); // fermer le fichier à la fin des traitements*/
+                	try {
+                        // Creation du fichier
+                        //fichier .createNewFile();
+                        // creation d'un writer (un écrivain)
+                        final FileWriter writer = new FileWriter(fichier, true);
+                        try {
+                        	String sTest=textid.getText();
+                            //writer.write("ceci est un texte\n");
+                            writer.write("Nom de l'utilisateur : \n"+sTest+" : \n");
+                            writer.write(" "+tempo+"\n\r\n");
+                            writer.write ("\r\n");
+                        } finally {
+                            // quoiqu'il arrive, on ferme le fichier
+                            writer.close();
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Impossible de creer le fichier");
+                    }
 				}
 			});
 			btnLogin.setBackground(Color.CYAN);
