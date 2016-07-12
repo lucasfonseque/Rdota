@@ -147,9 +147,11 @@ public class connexion_ihm0 extends JFrame {
                         try {
                         	String sTest=textid.getText();
                             //writer.write("ceci est un texte\n");
-                            writer.write("Nom de l'utilisateur : \n"+sTest+" : \n");
-                            writer.write(" "+tempo+"\n\r\n");
+                            writer.write("Connexion utilisateur : \n"+sTest+" \n");
                             writer.write ("\r\n");
+                            writer.write(" "+tempo+" \n");
+                            writer.write ("\r\n");
+                           
                         } finally {
                             // quoiqu'il arrive, on ferme le fichier
                             writer.close();

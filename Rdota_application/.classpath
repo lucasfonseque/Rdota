@@ -103,5 +103,6 @@
 	<classpathentry kind="lib" path="C:/Users/LFONSEQUE/workspace/axis2-1.7.3/lib/xmlbeans-2.5.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/LFONSEQUE/workspace/axis2-1.7.3/lib/xml-resolver-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/LFONSEQUE/workspace/axis2-1.7.3/lib/xmlschema-core-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LFONSEQUE/workspace/axis2-1.7.3/lib/org.osgi.foundation-1.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
